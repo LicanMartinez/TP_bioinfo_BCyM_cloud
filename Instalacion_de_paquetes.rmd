@@ -51,7 +51,9 @@ if (length(new.packages)>0) {
 
 Hay un último paquete que vamos a necesitar y que, como es muy pesado para descargar e instalar desde la nube, es necesario cargarlo manualmente al espacio de trabajo de R cloud. Para esto, seleccione la carpeta DESeq2, click en el engranaje que dice *More \> Move...*, vamos hasta ../lib/x86_64-pc-linux-gnu-library/4.2/, click en Choose.
 
-Para ver si la instalación de paquetes, y la carga manual de DESeq2, funcionaron, vamos a intentar "abrir" estos paquetes (cargarlos en el espacio de trabajo) con la función library.
+![](imagenes/importDESeq.png)
+
+Para ver si la instalación de paquetes, y la carga manual de DESeq2, funcionaron, vamos a intentar "abrir" estos paquetes (cargarlos en el espacio de trabajo) con la función require.
 
 ```{r}
 
@@ -76,4 +78,4 @@ lapply(pckg.ls, # para cada nombre de la lista de paquetes instalados...
 
 ```
 
-Si todos dieron TRUE, entonces ya puede seguir con el TP.
+Si todos dieron TRUE, entonces ya puede comenzar a trabajar con la guía del TP.
