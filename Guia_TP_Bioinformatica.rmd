@@ -8,10 +8,13 @@ output:
 editor_options:
   markdown:
     wrap: sentence
-bibliography: references.bib
 ---
 
-```{r, echo=FALSE}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=F)
+```
+
+```{r, echo=FALSE, eval=T}
 mycounter <- 0
 ```
 
@@ -72,9 +75,9 @@ Estos nombres tienen la información sobre el *diseño experimental*, es decir, 
 `ctrlRNAi_M.BRN_S19` es una muestra del cerebro (BRN = brain) de un macho (M = male) al que NO se le aplicó interferencia de RNA dirigida a dsx (ctrl).
 
 `r mycounter<-mycounter+1; mycounter`.
-¿Qué función/es de R podríamos utilizar para conocer la cantidad de genes y de muestras a partir de esta tabla?
+**¿Qué función/es de R podríamos utilizar para conocer la cantidad de genes y de muestras a partir de esta tabla?
 ¿Cuántos genes hay?
-¿Y muestras?
+¿Y muestras?**
 
 ## Tabla de diseño experimental
 
@@ -96,7 +99,9 @@ samples[1:8,]
 ```
 
 `r mycounter<-mycounter+1; mycounter`.
-**¿A qué corresponde cada fila?** `r mycounter<-mycounter+1; mycounter`.
+**¿A qué corresponde cada fila?** 
+
+`r mycounter<-mycounter+1; mycounter`.
 **¿A qué cree que hace referencia la última columna?**
 
 ## Selección de muestras
@@ -191,9 +196,9 @@ n.genes=nrow(data_filtered)
 
 A continuación, vamos a realizar una comparación general de los transcriptomas de todas las muestras.
 Recuerde que cada muestra cuenta, para cada gen, con un nivel de expresión determinado (el cual aproximamos con el número de lecturas de RNAseq que mapearon sobre ese gen).
-Por lo tanto, podemos considerar que cada muestra está en una determinada posición en cada uno de los `r n.genes` ejes definidos por el conjunto de genes.
+Por lo tanto, podemos considerar que cada muestra está en una determinada posición en cada uno de los ejes definidos por el conjunto de genes.
 
-![](./imagenes/coordinates.png){width="451"}
+![](./imagenes/coordinates.png){width="353"}
 
 ## Estabilización de la varianza (marco teórico **opcional**)
 
@@ -215,7 +220,7 @@ data_var.st=vst(data_filtered, blind = FALSE)
 
 ## Análisis de Componentes Principales (PCA)
 
-A continuación, vamos a visualizar la configuración de las muestras en el *espacio* de variables definido por los niveles de expresión de cada gen. Como este espacio tiene demasiadas dimensiones (`r n.genes`) vamos a realizar una reducción dimensional mediante la proyección ortogonal de la "sombra" de cada punto (correspondiente al transcriptoma de una muestra) sobre un plano de 2 dimensiones (Componentes Principales).
+A continuación, vamos a visualizar la configuración de las muestras en el *espacio* de variables definido por los niveles de expresión de cada gen. Como este espacio tiene demasiadas dimensiones vamos a realizar una reducción dimensional mediante la proyección ortogonal de la "sombra" de cada punto (correspondiente al transcriptoma de una muestra) sobre un plano de 2 dimensiones (Componentes Principales).
 
 ![](./imagenes/proyeccion.sombra.png){width="353"}
 
@@ -504,7 +509,7 @@ cts.norm=t(cts.trans.norm) %>%
 topgenes.n=5 # cantidad de genes a considerar
 ```
 
-Ahora, con esta tabla de conteos normalizados podemos graficar los niveles de expresion de los `r topgenes.n` genes con mayores diferencias entre sexos.
+Ahora, con esta tabla de conteos normalizados podemos graficar los niveles de expresion de los genes con mayores diferencias entre sexos.
 Para ello primero reorganizamos un poco las tablas.
 
 ```{r}
@@ -523,7 +528,7 @@ exp.table.long=pivot_longer(exp.table, cols = -c(1:5),
 ```
 
 Y filtramos sólo aquellos datos que nos interesa graficar.
-Por ahora sólo queremos comparar la expresión de los `r topgenes.n` genes de interés entre los tejidos cefálicos de machos y hembras control.
+Por ahora sólo queremos comparar la expresión de los 5 genes de interés entre los tejidos cefálicos de machos y hembras control.
 
 ```{r}
 data.plot= as.data.frame(exp.table.long) %>% # cambiamos a CLASS data.frame
