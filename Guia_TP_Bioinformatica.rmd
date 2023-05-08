@@ -283,8 +283,7 @@ ggplot(pcaData, # especificamos los datos de entrada
   
   # Especificación del conjunto de colores y su leyenda
   scale_fill_manual(values = colores2, 
-                    name=' ctr    dsx', 
-                    labels=c(rep('', length(tejidos)), tejidos))+
+                    name='Origen')+
   
   guides(fill=guide_legend(ncol=2)) +
   
