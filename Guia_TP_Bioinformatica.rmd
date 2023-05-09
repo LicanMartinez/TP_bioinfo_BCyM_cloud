@@ -461,19 +461,6 @@ print(head(res2))
 
 ```
 
-Exportamos las primeras filas de esta tabla a un archivo *.csv* que guardamos en el almacenamiento.
-
-```{r}
-
-write.table(res2%>% # tabla completa
-              mutate(gene=rownames(res2)) %>% # agregamos columna de genes
-              mutate(genomic.sequence=NA) %>% # columna vacía para llenar después
-              head(10), # solo primeras 10 filas
-            file = './head.results_samples.CHE.ctrl_DE.MvsF.csv', 
-            sep = '\t', row.names = F)
-
-```
-
 ## Comparación gráfica utilizando `ggplot`
 
 También podemos hacer una comparación gráfica de los niveles de expresión de cada gen entre condiciones.
