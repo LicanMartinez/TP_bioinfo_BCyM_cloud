@@ -432,7 +432,7 @@ Por defecto, la función `results` utiliza la *fómula* pasada al argumento `des
 #   as.data.frame() %>% 
 #   dplyr::select(-c(4:5)) # borrar algunas columans que no son de interés
 
-read.csv('./res.csv', row.names = 1)
+res = read.csv('./res.csv', row.names = 1)
 
 head(res, 5)
 
