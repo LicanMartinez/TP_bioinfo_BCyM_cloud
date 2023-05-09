@@ -23,6 +23,8 @@ En R, los paquetes son conjuntos de herramientas que otras personas desarrollaro
     BiocManager::install('BiocParallel', force = T)
     BiocManager::install('geneplotter', force = T)
     BiocManager::install('locfit', force = T)
+    
+    BiocManager::install('GenomeInfoDbData', force = T)
 
 
     ```

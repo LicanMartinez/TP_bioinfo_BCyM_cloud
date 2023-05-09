@@ -11,7 +11,7 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval=F)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r, echo=FALSE, eval=T}
@@ -75,9 +75,7 @@ Estos nombres tienen la información sobre el *diseño experimental*, es decir, 
 `ctrlRNAi_M.BRN_S19` es una muestra del cerebro (BRN = brain) de un macho (M = male) al que NO se le aplicó interferencia de RNA dirigida a dsx (ctrl).
 
 `r mycounter<-mycounter+1; mycounter`.
-**¿Qué función/es de R podríamos utilizar para conocer la cantidad de genes y de muestras a partir de esta tabla?
-¿Cuántos genes hay?
-¿Y muestras?**
+**¿Qué función/es de R podríamos utilizar para conocer la cantidad de genes y de muestras a partir de esta tabla? ¿Cuántos genes hay? ¿Y muestras?**
 
 ## Tabla de diseño experimental
 
@@ -99,7 +97,7 @@ samples[1:8,]
 ```
 
 `r mycounter<-mycounter+1; mycounter`.
-**¿A qué corresponde cada fila?** 
+**¿A qué corresponde cada fila?**
 
 `r mycounter<-mycounter+1; mycounter`.
 **¿A qué cree que hace referencia la última columna?**
@@ -283,8 +281,7 @@ ggplot(pcaData, # especificamos los datos de entrada
   
   # Especificación del conjunto de colores y su leyenda
   scale_fill_manual(values = colores2, 
-                    name=' ctr    dsx', 
-                    labels=c(rep('', length(tejidos)), tejidos))+
+                    name='Origen')+
   
   guides(fill=guide_legend(ncol=2)) +
   
@@ -424,16 +421,18 @@ nrow(data_DE)
 Con estos datos filtrados utilizamos la función `DESeq` para estimar el nivel de expresión de cada gen a lo largo de las diferentes condiciones (puede tardar varios segundos en correr).
 
 ```{r, results='hide', message=F}
-de.an=DESeq(data_DE)
+# de.an=DESeq(data_DE)
 ```
 
 Con el resultado de esta estimación, podemos generar una tabla que muestre el grado de expresión diferencial para cada gen entre diferentes condiciones.
 Por defecto, la función `results` utiliza la *fómula* pasada al argumento `design` al crear el objeto `DESeqDataSet` para hacer las comparaciones (entre sexos en este caso), pero nosotros podemos especificar la comparación que deseemos mediante el argumento `contrast`.
 
 ```{r}
-res = results(de.an, contrast = c('Sex', 'M', 'F')) %>% 
-  as.data.frame() %>% 
-  dplyr::select(-c(4:5)) # borrar algunas columans que no son de interés
+# res = results(de.an, contrast = c('Sex', 'M', 'F')) %>% 
+#   as.data.frame() %>% 
+#   dplyr::select(-c(4:5)) # borrar algunas columans que no son de interés
+
+read.csv('./res.csv', row.names = 1)
 
 head(res, 5)
 
